@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 
 import java.util.Date;
 
@@ -33,7 +33,7 @@ public class Estudio {
     public Estudio(long id, String titulo, String institucion, String descripcion, Date fecha_inicio, Date fecha_fin) {
         this.id = id;
         this.titulo = titulo;
-        this.institucion = this.institucion;
+        this.institucion = institucion;
         this.descripcion = descripcion;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;

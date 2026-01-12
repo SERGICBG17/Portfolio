@@ -1,7 +1,7 @@
 package com.tu.portfolio.model;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Id;
 
 @Entity
 @Table(name = "info")
