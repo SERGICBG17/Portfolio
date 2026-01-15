@@ -1,0 +1,200 @@
+/* =========================================
+   VARIABLES - TEMA GRIS OSCURO PROFESIONAL (DAM)
+   ========================================= */
+:root {
+    --bg-main: #0d1117;
+    --bg-accent: #161b22;
+    --text-primary: #f0f6fc;
+    --text-secondary: #8b949e;
+    --brand-color: #58a6ff;
+    --border-color: #30363d;
+    --pill-bg: #21262d;
+    --shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+/* =========================================
+   ESTILOS BASE
+   ========================================= */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 40px;
+    padding: 60px 20px;
+}
+
+/* =========================================
+   SIDEBAR (PERFIL - AHORA FOTO CUADRADA)
+   ========================================= */
+.sidebar {
+    position: sticky;
+    top: 40px;
+    height: fit-content;
+}
+
+.profile-card {
+    background: var(--bg-accent);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.profile-img {
+    width: 100%;       /* Ocupa el ancho de la tarjeta */
+    height: auto;
+    aspect-ratio: 1/1; /* Mantiene la proporción cuadrada */
+    border-radius: 15px; /* Cuadrada con esquinas suaves, no círculo */
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+}
+
+h1 { font-size: 1.6rem; margin: 0; font-weight: 700; }
+.subtitle { color: var(--brand-color); font-weight: 600; margin-bottom: 20px; display: block; }
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.contact-link:hover { color: var(--brand-color); }
+
+/* =========================================
+   STACK TÉCNICO (LOGOS MEJORADOS)
+   ========================================= */
+.tech-section { margin-top: 30px; }
+.tech-section h3 { font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 1px; }
+
+.stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tech-pill {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--pill-bg);
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.tech-pill img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    /* Efecto para ocultar fondos no transparentes */
+    mix-blend-mode: screen;
+    filter: contrast(1.1) brightness(1.1);
+}
+
+/* =========================================
+   BIO Y SEPARACIÓN CON PROYECTOS
+   ========================================= */
+
+/* Esta regla añade el espacio entre Sobre mí y Proyectos */
+.glass-card.bio {
+    margin-bottom: 50px;
+}
+
+.section-title { font-size: 1.4rem; margin-bottom: 20px; font-weight: 700; }
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+}
+
+.project-card {
+    background: var(--bg-accent);
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--brand-color);
+}
+
+.repo-link { color: var(--brand-color); text-decoration: none; font-weight: 700; font-size: 0.85rem; }
+
+/* =========================================
+   SEPARACIÓN: DUAL GRID (EXPERIENCIA Y EDUCACIÓN)
+   ========================================= */
+.dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 60px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 40px;
+}
+
+.glass-card {
+    background: var(--bg-accent);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+}
+
+/* =========================================
+   TIMELINE (EXPERIENCIA Y EDUCACIÓN)
+   ========================================= */
+.dual-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.timeline-item {
+    padding-left: 20px;
+    border-left: 1px solid #333;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5.5px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    background: var(--brand-color);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--brand-color);
+}
+
+.timeline-item h5 { margin: 0; color: #fff; }
+.company { color: var(--text-secondary); font-size: 0.85rem; }
+.date-text { color: var(--brand-color); font-size: 0.8rem; font-weight: bold; }
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 900px) {
+    .main-layout { grid-template-columns: 1fr; }
+    .sidebar { position: relative; top: 0; }
+    .projects-grid, .dual-grid { grid-template-columns: 1fr; }
+    .dual-grid { margin-top: 40px; }
+}

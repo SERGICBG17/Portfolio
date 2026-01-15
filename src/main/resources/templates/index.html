@@ -1,12 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link href = "css/styles.css" rel = "stylesheet"/>
-    <title>Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Profesional</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Hola Mundo</h1>
-    <p>Esto es para probar que funciona</p>
+
+<div class="main-layout">
+    <aside class="sidebar">
+        <div class="profile-card">
+
+            <img th:src="${info.foto_url}" alt="Profile" class="profile-img">
+
+            <h1 th:text="${info.nombre}"></h1>
+            <p class="subtitle">Junior Developer</p>
+
+            <div class="contact-info">
+                <p th:if="${info.email != null}" class="contact-link">
+                    <span class="icon">✉</span> <span th:text="${info.email}"></span>
+                </p>
+                <a th:if="${info.linkedin != null}" th:href="${info.linkedin}" class="contact-link" target="_blank">
+                    <span class="icon">in</span> LinkedIn
+                </a>
+                <a th:if="${info.github != null}" th:href="${info.github}" class="contact-link" target="_blank">
+                    <span class="icon">gh</span> GitHub
+                </a>
+            </div>
+        </div>
+
+        <div class="tech-section">
+            <h3>Stack Técnico</h3>
+            <div class="stack-grid">
+                <div th:each="lang : ${lenguajes}" th:if="${lenguajes != null}" class="tech-pill">
+                    <img th:if="${lang.icono_url != null}" th:src="${lang.icono_url}" alt="logo">
+                    <span th:text="${lang.nombre}"></span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <section class="content">
+        <div class="glass-card bio">
+            <h3>Sobre mí</h3>
+            <p th:text="${info.descripcion}"></p>
+        </div>
+
+        <div class="section-title">Proyectos Destacados</div>
+        <div class="projects-grid">
+            <div th:each="proy : ${proyectos}" th:if="${proyectos != null}" class="project-card">
+                <div class="project-content">
+                    <h4 th:text="${proy.nombre}"></h4>
+                    <p th:text="${proy.descripcion}"></p>
+                    <div class="project-footer">
+                        <a th:if="${proy.github_url != null}" th:href="${proy.github_url}" target="_blank" class="repo-link">Ver Código →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dual-grid">
+            <div class="glass-card">
+                <h3>Experiencia</h3>
+                <div th:each="exp : ${experiencias}" th:if="${experiencias != null}" class="timeline-item">
+                    <h5 th:text="${exp.puesto}"></h5>
+                    <span class="company" th:text="${exp.empresa}"></span>
+                    <br>
+                    <span class="company" th:text="${exp.fecha_inicio} + ' - ' + ${exp.fecha_fin}"></span>
+                </div>
+            </div>
+
+            <div class="glass-card">
+                <h3>Educación</h3>
+                <div th:each="edu : ${estudios}" th:if="${estudios != null}" class="timeline-item">
+                    <h5 th:text="${edu.titulo}"></h5>
+                    <span class="company" th:text="${edu.institucion}"></span>
+                    <br>
+                    <span class="company" th:text="${edu.fecha_inicio} + ' - ' + ${edu.fecha_fin}"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 </body>
 </html>
