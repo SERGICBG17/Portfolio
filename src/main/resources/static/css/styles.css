@@ -1,200 +1,119 @@
-/* =========================================
-   VARIABLES - TEMA GRIS OSCURO PROFESIONAL (DAM)
-   ========================================= */
 :root {
-    --bg-main: #0d1117;
-    --bg-accent: #161b22;
-    --text-primary: #f0f6fc;
-    --text-secondary: #8b949e;
-    --brand-color: #58a6ff;
-    --border-color: #30363d;
-    --pill-bg: #21262d;
-    --shadow: 0 8px 24px rgba(0,0,0,0.3);
+    --bg: #050505;
+    --panel: rgba(13, 13, 16, 0.9);
+    --accent: #3b82f6;
+    --border: rgba(255, 255, 255, 0.08);
+    --font-mono: 'Fira Code', monospace;
 }
 
-/* =========================================
-   ESTILOS BASE
-   ========================================= */
 body {
-    background-color: var(--bg-main);
-    color: var(--text-primary);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background-color: var(--bg);
+    color: #f8fafc;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
-.main-layout {
+/* REJILLA TÉCNICA DE FONDO */
+.blueprint-grid {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    mask-image: radial-gradient(circle at center, black, transparent 95%);
+}
+
+.wrapper { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
+
+/* HEADER */
+.hero-node { text-align: center; margin-bottom: 60px; }
+.system-id {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #111; padding: 6px 15px; border: 1px solid var(--border);
+    font-family: var(--font-mono); font-size: 11px; border-radius: 4px;
+}
+.pulse { width: 8px; height: 8px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981; }
+
+.glitch-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900; letter-spacing: -2px; text-transform: uppercase; margin: 15px 0;
+}
+.role-subtitle { color: var(--accent); font-family: var(--font-mono); letter-spacing: 2px; font-size: 14px; }
+
+.social-terminals { margin-top: 30px; display: flex; justify-content: center; gap: 25px; font-family: var(--font-mono); }
+.social-terminals a { color: white; text-decoration: none; opacity: 0.6; transition: 0.3s; font-size: 13px; }
+.social-terminals a:hover { opacity: 1; color: var(--accent); }
+
+/* BENTO GRID */
+.bento-grid {
     display: grid;
-    grid-template-columns: 320px 1fr;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 40px;
-    padding: 60px 20px;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
 }
 
-/* =========================================
-   SIDEBAR (PERFIL - AHORA FOTO CUADRADA)
-   ========================================= */
-.sidebar {
-    position: sticky;
-    top: 40px;
-    height: fit-content;
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    border-top: 2px solid transparent;
 }
+.panel:hover { border-top-color: var(--accent); transition: 0.4s; }
 
-.profile-card {
-    background: var(--bg-accent);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
-}
+.panel-tag { font-family: var(--font-mono); font-size: 10px; color: var(--accent); margin-bottom: 20px; }
+.panel-tag span { background: var(--accent); color: white; padding: 2px 6px; margin-right: 10px; }
 
-.profile-img {
-    width: 100%;       /* Ocupa el ancho de la tarjeta */
-    height: auto;
-    aspect-ratio: 1/1; /* Mantiene la proporción cuadrada */
-    border-radius: 15px; /* Cuadrada con esquinas suaves, no círculo */
-    object-fit: cover;
-    margin-bottom: 20px;
-    border: 1px solid var(--border-color);
-}
+/* DISTRIBUCIÓN DE COLUMNAS */
+.tech-box { grid-column: span 3; grid-row: span 2; }
+.exp-box { grid-column: span 5; grid-row: span 2; }
+.edu-box { grid-column: span 4; }
+.project-box { grid-column: span 4; }
 
-h1 { font-size: 1.6rem; margin: 0; font-weight: 700; }
-.subtitle { color: var(--brand-color); font-weight: 600; margin-bottom: 20px; display: block; }
-
-.contact-link {
-    display: flex;
-    align-items: center;
+/* TECH MATRIX */
+.tech-matrix {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
     gap: 10px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin-bottom: 12px;
+}
+.tech-item {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border); padding: 10px 5px; border-radius: 4px;
+}
+.tech-icon-wrapper { width: 28px; height: 28px; margin-bottom: 8px; }
+.tech-item img { max-width: 100%; max-height: 100%; filter: grayscale(1); transition: 0.3s; }
+.tech-item:hover img { filter: grayscale(0); transform: scale(1.1); }
+.tech-name { font-family: var(--font-mono); font-size: 9px; color: #94a3b8; text-transform: uppercase; }
+
+/* TIMELINE */
+.timeline-entry { border-left: 2px solid var(--accent); padding-left: 15px; margin-bottom: 20px; }
+.timeline-entry h3 { font-size: 1.1rem; margin: 0; }
+.t-company { color: var(--accent); font-weight: bold; font-size: 11px; text-transform: uppercase; }
+.timeline-entry p { font-size: 12px; color: #94a3b8; margin-top: 8px; }
+
+/* PROYECTOS */
+.project-card { background: rgba(255,255,255,0.02); padding: 15px; border: 1px dashed var(--border); margin-bottom: 10px; }
+.p-top { display: flex; justify-content: space-between; align-items: center; }
+.p-link { font-family: var(--font-mono); font-size: 9px; color: var(--accent); text-decoration: none; font-weight: bold; }
+.project-card p { font-size: 12px; color: #94a3b8; margin-top: 10px; }
+
+/* EDUCACIÓN */
+.edu-item { margin-bottom: 15px; }
+.edu-head { display: flex; align-items: center; gap: 10px; color: var(--accent); }
+.edu-head h4 { margin: 0; font-size: 0.95rem; color: #f8fafc; }
+.edu-item p { font-size: 11px; margin: 5px 0 0 24px; color: #94a3b8; }
+
+/* FOOTER */
+.system-footer {
+    margin-top: 60px; padding: 20px 0; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 11px; opacity: 0.5;
 }
 
-.contact-link:hover { color: var(--brand-color); }
-
-/* =========================================
-   STACK TÉCNICO (LOGOS MEJORADOS)
-   ========================================= */
-.tech-section { margin-top: 30px; }
-.tech-section h3 { font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 1px; }
-
-.stack-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.tech-pill {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--pill-bg);
-    padding: 6px 14px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-}
-
-.tech-pill img {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    /* Efecto para ocultar fondos no transparentes */
-    mix-blend-mode: screen;
-    filter: contrast(1.1) brightness(1.1);
-}
-
-/* =========================================
-   BIO Y SEPARACIÓN CON PROYECTOS
-   ========================================= */
-
-/* Esta regla añade el espacio entre Sobre mí y Proyectos */
-.glass-card.bio {
-    margin-bottom: 50px;
-}
-
-.section-title { font-size: 1.4rem; margin-bottom: 20px; font-weight: 700; }
-
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-}
-
-.project-card {
-    background: var(--bg-accent);
-    padding: 25px;
-    border-radius: 15px;
-    border: 1px solid var(--border-color);
-    transition: transform 0.2s, border-color 0.2s;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--brand-color);
-}
-
-.repo-link { color: var(--brand-color); text-decoration: none; font-weight: 700; font-size: 0.85rem; }
-
-/* =========================================
-   SEPARACIÓN: DUAL GRID (EXPERIENCIA Y EDUCACIÓN)
-   ========================================= */
-.dual-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-top: 60px;
-    border-top: 1px solid var(--border-color);
-    padding-top: 40px;
-}
-
-.glass-card {
-    background: var(--bg-accent);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
-}
-
-/* =========================================
-   TIMELINE (EXPERIENCIA Y EDUCACIÓN)
-   ========================================= */
-.dual-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-}
-
-.timeline-item {
-    padding-left: 20px;
-    border-left: 1px solid #333;
-    margin-bottom: 30px;
-    position: relative;
-}
-
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -5.5px;
-    top: 5px;
-    width: 10px;
-    height: 10px;
-    background: var(--brand-color);
-    border-radius: 50%;
-    box-shadow: 0 0 15px var(--brand-color);
-}
-
-.timeline-item h5 { margin: 0; color: #fff; }
-.company { color: var(--text-secondary); font-size: 0.85rem; }
-.date-text { color: var(--brand-color); font-size: 0.8rem; font-weight: bold; }
-
-/* =========================================
-   RESPONSIVE
-   ========================================= */
-@media (max-width: 900px) {
-    .main-layout { grid-template-columns: 1fr; }
-    .sidebar { position: relative; top: 0; }
-    .projects-grid, .dual-grid { grid-template-columns: 1fr; }
-    .dual-grid { margin-top: 40px; }
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .tech-box, .exp-box, .edu-box, .project-box { grid-column: span 1; }
 }

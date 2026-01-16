@@ -1,88 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Profesional</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title th:text="${info.nombre}"></title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
+<div class="blueprint-grid"></div>
 
-<div class="main-layout">
-    <aside class="sidebar">
-        <div class="profile-card">
-
-            <img th:src="${info.foto_url}" alt="Profile" class="profile-img">
-
-            <h1 th:text="${info.nombre}"></h1>
-            <p class="subtitle">Junior Developer</p>
-
-            <div class="contact-info">
-                <p th:if="${info.email != null}" class="contact-link">
-                    <span class="icon">✉</span> <span th:text="${info.email}"></span>
-                </p>
-                <a th:if="${info.linkedin != null}" th:href="${info.linkedin}" class="contact-link" target="_blank">
-                    <span class="icon">in</span> LinkedIn
-                </a>
-                <a th:if="${info.github != null}" th:href="${info.github}" class="contact-link" target="_blank">
-                    <span class="icon">gh</span> GitHub
-                </a>
-            </div>
+<div class="wrapper">
+    <header class="hero-node">
+        <div class="system-id">
+            <span class="pulse"></span> ENGINEER_ID: <span th:text="${info.nombre}">SERGIO CASÍN HERMOSO</span>
         </div>
+        <h1 class="glitch-title" th:text="${info.nombre}">SERGIO CASÍN HERMOSO</h1>
+        <p class="role-subtitle">// JUNIOR DEVELOPER</p>
 
-        <div class="tech-section">
-            <h3>Stack Técnico</h3>
-            <div class="stack-grid">
-                <div th:each="lang : ${lenguajes}" th:if="${lenguajes != null}" class="tech-pill">
-                    <img th:if="${lang.icono_url != null}" th:src="${lang.icono_url}" alt="logo">
-                    <span th:text="${lang.nombre}"></span>
-                </div>
-            </div>
-        </div>
-    </aside>
+        <nav class="social-terminals">
+            <a th:href="${info.linkedin}" target="_blank"><i class="fa-brands fa-linkedin"></i> LN</a>
+            <a th:href="${info.github}" target="_blank"><i class="fa-brands fa-github"></i> GH</a>
+            <a th:href="'mailto:' + ${info.email}"><i class="fa-solid fa-envelope"></i> EM</a>
+        </nav>
+    </header>
 
-    <section class="content">
-        <div class="glass-card bio">
-            <h3>Sobre mí</h3>
-            <p th:text="${info.descripcion}"></p>
-        </div>
+    <div class="bento-grid">
 
-        <div class="section-title">Proyectos Destacados</div>
-        <div class="projects-grid">
-            <div th:each="proy : ${proyectos}" th:if="${proyectos != null}" class="project-card">
-                <div class="project-content">
-                    <h4 th:text="${proy.nombre}"></h4>
-                    <p th:text="${proy.descripcion}"></p>
-                    <div class="project-footer">
-                        <a th:if="${proy.github_url != null}" th:href="${proy.github_url}" target="_blank" class="repo-link">Ver Código →</a>
+        <section class="panel tech-box">
+            <div class="panel-tag"><span>01</span> TECH_STACK</div>
+            <div class="tech-matrix">
+                <div class="tech-item" th:each="l : ${lenguajes}">
+                    <div class="tech-icon-wrapper">
+                        <img th:src="${l.icono_url}" th:alt="${l.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/606/606201.png'">
                     </div>
+                    <span class="tech-name" th:text="${l.nombre}">Java</span>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div class="dual-grid">
-            <div class="glass-card">
-                <h3>Experiencia</h3>
-                <div th:each="exp : ${experiencias}" th:if="${experiencias != null}" class="timeline-item">
-                    <h5 th:text="${exp.puesto}"></h5>
-                    <span class="company" th:text="${exp.empresa}"></span>
-                    <br>
-                    <span class="company" th:text="${exp.fecha_inicio} + ' - ' + ${exp.fecha_fin}"></span>
+        <section class="panel exp-box">
+            <div class="panel-tag"><span>02</span> DEPLOYMENT_HISTORY</div>
+            <div class="timeline">
+                <div class="timeline-entry" th:each="e : ${experiencias}">
+                    <div class="t-header">
+                        <h3 th:text="${e.puesto}">Puesto</h3>
+                        <span class="t-company" th:text="${e.empresa}">Empresa</span>
+                    </div>
+                    <p th:text="${e.descripcion}"></p>
                 </div>
             </div>
+        </section>
 
-            <div class="glass-card">
-                <h3>Educación</h3>
-                <div th:each="edu : ${estudios}" th:if="${estudios != null}" class="timeline-item">
-                    <h5 th:text="${edu.titulo}"></h5>
-                    <span class="company" th:text="${edu.institucion}"></span>
-                    <br>
-                    <span class="company" th:text="${edu.fecha_inicio} + ' - ' + ${edu.fecha_fin}"></span>
+        <section class="panel edu-box">
+            <div class="panel-tag"><span>03</span> KNOWLEDGE_BASE</div>
+            <div class="edu-list">
+                <div class="edu-item" th:each="est : ${estudios}">
+                    <div class="edu-head">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <h4 th:text="${est.titulo}">Título</h4>
+                    </div>
+                    <p th:text="${est.institucion}">Institución</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <section class="panel project-box">
+            <div class="panel-tag"><span>04</span> ACTIVE_PROJECTS</div>
+            <div class="project-grid">
+                <div class="project-card" th:each="p : ${proyectos}">
+                    <div class="p-top">
+                        <h4 th:text="${p.nombre}">Proyecto</h4>
+                        <a th:href="${p.github_url}" target="_blank" class="p-link">VER_CÓDIGO <i class="fa-solid fa-chevron-right"></i></a>
+                    </div>
+                    <p th:text="${p.descripcion}"></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="system-footer">
+        <span>© 2026_CORE_SYSTEM</span>
+        <span class="status-ready">SYSTEM_STABLE_READY</span>
+    </footer>
 </div>
-
 </body>
 </html>
