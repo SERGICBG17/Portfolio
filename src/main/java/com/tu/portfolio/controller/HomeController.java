@@ -1,9 +1,12 @@
 package com.tu.portfolio.controller;
 
+import com.tu.portfolio.model.*;
 import com.tu.portfolio.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -25,11 +28,11 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
         //Hacer la petición al servicio
-        var info = infoService.getAll().get(0);
-        var estudios = estudiosService.getAll();
-        var experiencias = experienciaService.getAll();
-        var lenguajes = lenguajeService.getAll();
-        var proyectos = proyectoService.getAll();
+        Info info = infoService.getAll().get(0);
+        List<Estudio> estudios = estudiosService.getAll();
+        List<Experiencia> experiencias = experienciaService.getAll();
+        List<Lenguaje> lenguajes = lenguajeService.getAll();
+        List<Proyecto> proyectos = proyectoService.getAll();
 
         //añadir al modelo
         model.addAttribute("info", info);
