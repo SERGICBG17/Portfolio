@@ -1,6 +1,8 @@
 package com.tu.portfolio.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class Proyecto {
     String descripcion;
     String github_url;
     String imagen_url;
-    Date fecha;
+    LocalDate fecha;
 
     @ManyToMany
     @JoinTable(
@@ -33,7 +35,7 @@ public class Proyecto {
         this.nombre = nombre;
     }
 
-    public Proyecto(long id, String nombre, String descripcion, String github_url, String imagen_url, Date fecha) {
+    public Proyecto(long id, String nombre, String descripcion, String github_url, String imagen_url, LocalDate fecha) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -82,11 +84,11 @@ public class Proyecto {
         this.imagen_url = imagen_url;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
