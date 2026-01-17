@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### conexion a base de datos ###
+application.properties
+**/application.properties
