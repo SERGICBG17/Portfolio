@@ -12,13 +12,14 @@ public class Proyecto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
 
-    String nombre; // no nulo
-    String descripcion;
-    String github_url;
-    String imagen_url;
-    LocalDate fecha;
+    private String nombre; // no nulo
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+    private String github_url;
+    private String imagen_url;
+    private LocalDate fecha;
 
     @ManyToMany
     @JoinTable(

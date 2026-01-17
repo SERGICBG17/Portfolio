@@ -9,15 +9,15 @@ public class Info {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
 
-    String nombre;//no nulo
-    String descripcion;
-    String foto_url;
-    String email;//no nulo
-    String telefono;
-    String linkedin;
-    String github;
+    private String nombre;//no nulo
+    private String descripcion;
+    private String foto_url;
+    private String email;//no nulo
+    private String telefono;
+    private String linkedin;
+    private String github;
 
     public Info() {}
 

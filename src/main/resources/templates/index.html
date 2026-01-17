@@ -7,13 +7,26 @@
     <link rel="stylesheet" th:href="@{/css/all.min.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
-<body>
-<div class="blueprint-grid"></div>
+<body id="top"> <div class="blueprint-grid"></div>
+
+<nav class="terminal-menu">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <span class="pulse-green"></span> [CORE_LINK]
+        </div>
+        <ul>
+            <li><a href="#stack"><span class="nav-num">01.</span> STACK</a></li>
+            <li><a href="#projects"><span class="nav-num">02.</span> PROJECTS</a></li>
+            <li><a href="#knowledge"><span class="nav-num">03.</span> KNOWLEDGE</a></li>
+            <li><a href="#experience"><span class="nav-num">04.</span> EXP</a></li>
+        </ul>
+    </div>
+</nav>
 
 <div class="wrapper">
     <header class="hero-node">
         <div class="system-id">
-            <span class="pulse"></span> ENGINEER_ID: <span th:text="${info.nombre}"></span>
+            <span class="pulse-green"></span> ENGINEER_ID: <span th:text="${info.nombre}"></span>
         </div>
         <h1 class="glitch-title" th:text="${info.nombre}"></h1>
         <p class="role-subtitle">// JUNIOR DEVELOPER</p>
@@ -29,8 +42,7 @@
     </header>
 
     <div class="bento-grid">
-
-        <section class="panel tech-box">
+        <section id="stack" class="panel tech-box">
             <div class="panel-tag"><span>01</span> TECH_STACK</div>
             <div class="tech-matrix">
                 <div class="tech-item" th:each="l : ${lenguajes}">
@@ -42,20 +54,20 @@
             </div>
         </section>
 
-        <section class="panel exp-box">
-            <div class="panel-tag"><span>02</span> DEPLOYMENT_HISTORY</div>
-            <div class="timeline">
-                <div class="timeline-entry" th:each="e : ${experiencias}">
-                    <div class="t-header">
-                        <h3 th:text="${e.puesto}"></h3>
-                        <span class="t-company" th:text="${e.empresa}"></span>
+        <section id="projects" class="panel exp-box">
+            <div class="panel-tag"><span>02</span> ACTIVE_PROJECTS</div>
+            <div class="project-grid">
+                <div class="project-card" th:each="p : ${proyectos}">
+                    <div class="p-top">
+                        <h4 th:text="${p.nombre}"></h4>
+                        <a th:href="${p.github_url}" target="_blank" class="p-link">VER_CÓDIGO <i class="fa-solid fa-chevron-right"></i></a>
                     </div>
-                    <p th:text="${e.descripcion}"></p>
+                    <p th:text="${p.descripcion}"></p>
                 </div>
             </div>
         </section>
 
-        <section class="panel edu-box">
+        <section id="knowledge" class="panel edu-box">
             <div class="panel-tag"><span>03</span> KNOWLEDGE_BASE</div>
             <div class="edu-list">
                 <div class="edu-item" th:each="est : ${estudios}">
@@ -68,15 +80,15 @@
             </div>
         </section>
 
-        <section class="panel project-box">
-            <div class="panel-tag"><span>04</span> ACTIVE_PROJECTS</div>
-            <div class="project-grid">
-                <div class="project-card" th:each="p : ${proyectos}">
-                    <div class="p-top">
-                        <h4 th:text="${p.nombre}"></h4>
-                        <a th:href="${p.github_url}" target="_blank" class="p-link">VER_CÓDIGO <i class="fa-solid fa-chevron-right"></i></a>
+        <section id="experience" class="panel project-box">
+            <div class="panel-tag"><span>04</span> DEPLOYMENT_HISTORY</div>
+            <div class="timeline">
+                <div class="timeline-entry" th:each="e : ${experiencias}">
+                    <div class="t-header">
+                        <h3 th:text="${e.puesto}"></h3>
+                        <span class="t-company" th:text="${e.empresa}"></span>
                     </div>
-                    <p th:text="${p.descripcion}"></p>
+                    <p th:text="${e.descripcion}"></p>
                 </div>
             </div>
         </section>

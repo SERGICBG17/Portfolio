@@ -12,10 +12,10 @@ public class Lenguaje {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
 
-    String nombre; // no nulo
-    String icono_url;
+    private String nombre; // no nulo
+    private String icono_url;
 
     public Lenguaje() {}
 

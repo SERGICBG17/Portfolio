@@ -1,10 +1,6 @@
 package com.tu.portfolio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -15,13 +11,14 @@ public class Experiencia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
 
-    String puesto;//no nulo
-    String empresa;//no nulo
-    String descripcion;
-    LocalDate fecha_inicio;
-    LocalDate fecha_fin;
+    private String puesto;//no nulo
+    private String empresa;//no nulo
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+    private LocalDate fecha_inicio;
+    private LocalDate fecha_fin;
 
     public Experiencia() {}
 
