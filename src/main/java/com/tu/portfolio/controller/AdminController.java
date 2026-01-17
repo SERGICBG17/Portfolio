@@ -29,11 +29,12 @@ public class AdminController {
     @GetMapping("")
     public String dashboard() { return "admin/dashboard"; }
 
-    // --- PROYECTOS ---
     @GetMapping("/proyectos")
     public String proyectos(Model model) {
         model.addAttribute("proyectos", proyectoService.getAll());
-        if (!model.containsAttribute("proyecto")) model.addAttribute("proyecto", new Proyecto());
+        if (!model.containsAttribute("proyecto")){
+            model.addAttribute("proyecto", new Proyecto());
+        }
         return "admin/proyecto-form";
     }
 
@@ -44,11 +45,12 @@ public class AdminController {
         return "admin/proyecto-form";
     }
 
-    // --- EXPERIENCIA ---
     @GetMapping("/experiencia")
     public String experiencia(Model model) {
         model.addAttribute("experiencias", experienciaService.getAll());
-        if (!model.containsAttribute("experiencia")) model.addAttribute("experiencia", new Experiencia());
+        if (!model.containsAttribute("experiencia")){
+            model.addAttribute("experiencia", new Experiencia());
+        }
         return "admin/experiencia-form";
     }
 
@@ -59,11 +61,12 @@ public class AdminController {
         return "admin/experiencia-form";
     }
 
-    // --- ESTUDIOS ---
     @GetMapping("/estudios")
     public String estudios(Model model) {
         model.addAttribute("estudios", estudiosService.getAll());
-        if (!model.containsAttribute("estudio")) model.addAttribute("estudio", new Estudio());
+        if (!model.containsAttribute("estudio")){
+            model.addAttribute("estudio", new Estudio());
+        }
         return "admin/estudios-form";
     }
 
@@ -74,11 +77,12 @@ public class AdminController {
         return "admin/estudios-form";
     }
 
-    // --- LENGUAJES ---
     @GetMapping("/lenguajes")
     public String lenguajes(Model model) {
         model.addAttribute("lenguajes", lenguajeService.getAll());
-        if (!model.containsAttribute("lenguaje")) model.addAttribute("lenguaje", new Lenguaje());
+        if (!model.containsAttribute("lenguaje")){
+            model.addAttribute("lenguaje", new Lenguaje());
+        }
         return "admin/lenguaje-form";
     }
 
@@ -89,11 +93,9 @@ public class AdminController {
         return "admin/lenguaje-form";
     }
 
-    // --- INFO PERSONAL ---
     @GetMapping("/info")
     public String info(Model model) {
-        var infoList = infoService.getAll();
-        model.addAttribute("info", infoList.isEmpty() ? new Info() : infoList.get(0));
+        model.addAttribute("info", infoService.getAll().get(0));
         return "admin/info-form";
     }
 }
