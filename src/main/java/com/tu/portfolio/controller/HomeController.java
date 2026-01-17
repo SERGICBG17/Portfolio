@@ -27,19 +27,12 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        //Hacer la petición al servicio
-        Info info = infoService.getAll().get(0);
-        List<Estudio> estudios = estudiosService.getAll();
-        List<Experiencia> experiencias = experienciaService.getAll();
-        List<Lenguaje> lenguajes = lenguajeService.getAll();
-        List<Proyecto> proyectos = proyectoService.getAll();
-
         //añadir al modelo
-        model.addAttribute("info", info);
-        model.addAttribute("estudios", estudios);
-        model.addAttribute("experiencias", experiencias);
-        model.addAttribute("lenguajes", lenguajes);
-        model.addAttribute("proyectos", proyectos);
+        model.addAttribute("info", infoService.getAll().get(0));
+        model.addAttribute("estudios", estudiosService.getAll());
+        model.addAttribute("experiencias", experienciaService.getAll());
+        model.addAttribute("lenguajes", lenguajeService.getAll());
+        model.addAttribute("proyectos", proyectoService.getAll());
 
         return "index";
     }

@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final InfoService infoService;
@@ -27,7 +27,9 @@ public class AdminController {
     }
 
     @GetMapping("")
-    public String dashboard() { return "admin/dashboard"; }
+    public String dashboard() {
+        return "admin/dashboard";
+    }
 
     @GetMapping("/proyectos")
     public String proyectos(Model model) {

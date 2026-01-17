@@ -5,10 +5,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Admin/lenguajes")
+@RequestMapping("/admin/lenguajes")
 public class LenguajesController {
     private final LenguajeService service;
-    public LenguajesController(LenguajeService service) { this.service = service; }
+    public LenguajesController(LenguajeService service) {
+        this.service = service;
+    }
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Lenguaje obj) {

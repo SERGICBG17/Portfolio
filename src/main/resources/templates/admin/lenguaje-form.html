@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
+    <a th:href="@{/admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
     <h1><i class="fa-solid fa-microchip" style="color: var(--accent); margin-right: 15px;"></i>TECH_STACK_INVENTORY</h1>
 
     <table class="data-table">
@@ -21,9 +21,9 @@
         </thead>
         <tbody>
         <tr th:each="l : ${lenguajes}">
-            <td class="txt-mono"><a th:href="@{'/Admin/lenguajes/editar/' + ${l.id}}" th:text="${l.nombre}" class="nombre-clickable"></a></td>
+            <td class="txt-mono"><a th:href="@{'/admin/lenguajes/editar/' + ${l.id}}" th:text="${l.nombre}" class="nombre-clickable"></a></td>
             <td th:text="${l.icono_url}" style="font-size: 11px; color: var(--text-dim);"></td>
-            <td><a th:href="@{'/Admin/lenguajes/eliminar/' + ${l.id}}" class="btn-delete" onclick="return confirm('¿Borrar tecnología?')"><i class="fa-solid fa-xmark"></i></a></td>
+            <td><a th:href="@{'/admin/lenguajes/eliminar/' + ${l.id}}" class="btn-delete" onclick="return confirm('¿Borrar tecnología?')"><i class="fa-solid fa-xmark"></i></a></td>
         </tr>
         </tbody>
     </table>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="form-card">
-        <form th:action="@{/Admin/lenguajes/guardar}" th:object="${lenguaje}" method="post">
+        <form th:action="@{/admin/lenguajes/guardar}" th:object="${lenguaje}" method="post">
             <input type="hidden" th:field="*{id}">
             <div class="form-group-inline" style="grid-template-columns: 1fr 2fr;">
                 <div class="form-group">

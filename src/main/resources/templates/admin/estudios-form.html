@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
+    <a th:href="@{/admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
     <h1><i class="fa-solid fa-graduation-cap" style="color: var(--accent); margin-right: 15px;"></i>KNOWLEDGE_BASE</h1>
 
     <table class="data-table">
@@ -22,9 +22,9 @@
         </thead>
         <tbody>
         <tr th:each="est : ${estudios}">
-            <td><a th:href="@{'/Admin/estudios/editar/' + ${est.id}}" th:text="${est.titulo}" class="nombre-clickable"></a></td>
+            <td><a th:href="@{'/admin/estudios/editar/' + ${est.id}}" th:text="${est.titulo}" class="nombre-clickable"></a></td>
             <td th:text="${est.institucion}" style="color: var(--text-dim);"></td>
-            <td><a th:href="@{'/Admin/estudios/eliminar/' + ${est.id}}" class="btn-delete" onclick="return confirm('¿Borrar estudio?')"><i class="fa-solid fa-trash"></i></a></td>
+            <td><a th:href="@{'/admin/estudios/eliminar/' + ${est.id}}" class="btn-delete" onclick="return confirm('¿Borrar estudio?')"><i class="fa-solid fa-trash"></i></a></td>
         </tr>
         </tbody>
     </table>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-card">
-        <form th:action="@{/Admin/estudios/guardar}" th:object="${estudio}" method="post">
+        <form th:action="@{/admin/estudios/guardar}" th:object="${estudio}" method="post">
             <input type="hidden" th:field="*{id}">
             <div class="form-group">
                 <label>DEGREE_TITLE</label>
@@ -57,7 +57,7 @@
             <button type="submit">
                 <i class="fa-solid fa-floppy-disk"></i> [[${estudio.id != 0} ? 'GUARDAR_CAMBIOS' : 'AÑADIR_ESTUDIO']]
             </button>
-            <a th:if="${estudio.id != 0}" th:href="@{/Admin/estudios}" class="btn-back" style="margin-left:15px;">CANCELAR</a>
+            <a th:if="${estudio.id != 0}" th:href="@{/admin/estudios}" class="btn-back" style="margin-left:15px;">CANCELAR</a>
         </form>
     </div>
 </div>

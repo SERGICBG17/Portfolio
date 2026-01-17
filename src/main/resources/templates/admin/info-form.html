@@ -9,11 +9,11 @@
 </head>
 <body>
 <div class="container">
-    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
+    <a th:href="@{/admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
     <h1><i class="fa-solid fa-user-gear" style="color: var(--accent); margin-right: 15px;"></i>CORE_IDENTITY_CONFIG</h1>
 
     <div class="form-card">
-        <form th:action="@{/Admin/info/guardar}" th:object="${info}" method="post">
+        <form th:action="@{/admin/info/guardar}" th:object="${info}" method="post">
             <input type="hidden" th:field="*{id}">
             <div class="form-group">
                 <label>FULL_NAME</label>

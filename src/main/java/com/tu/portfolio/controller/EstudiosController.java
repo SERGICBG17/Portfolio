@@ -5,20 +5,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Admin/estudios")
+@RequestMapping("/admin/estudios")
 public class EstudiosController {
     private final EstudiosService service;
-    public EstudiosController(EstudiosService service) { this.service = service; }
+    public EstudiosController(EstudiosService service) {
+        this.service = service;
+    }
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute Estudio obj) {
         service.add(obj);
-        return "redirect:/Admin/estudios";
+        return "redirect:/admin/estudios";
     }
 
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
         service.delete(id);
-        return "redirect:/Admin/estudios";
+        return "redirect:/admin/estudios";
     }
 }

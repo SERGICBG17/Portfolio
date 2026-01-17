@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/Admin/info")
+@RequestMapping("/admin/info")
 public class InfoController {
 
     private InfoService infoService;
@@ -20,6 +20,6 @@ public class InfoController {
         // El ID suele ser 1 para tu perfil personal fijo
         info.setId(1L);
         infoService.add(info);
-        return "redirect:/Admin/info";
+        return "redirect:/admin/info";
     }
 }

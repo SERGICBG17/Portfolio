@@ -11,7 +11,7 @@
 <div class="blueprint-grid"></div>
 
 <div class="container">
-    <a th:href="@{/Admin}" class="btn-back">
+    <a th:href="@{/admin}" class="btn-back">
         <i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL
     </a>
 
@@ -33,13 +33,13 @@
             <tbody>
             <tr th:each="e : ${experiencias}">
                 <td>
-                    <a th:href="@{'/Admin/experiencia/editar/' + ${e.id}}"
+                    <a th:href="@{'/admin/experiencia/editar/' + ${e.id}}"
                        th:text="${e.puesto}"
                        class="nombre-clickable"></a>
                 </td>
                 <td th:text="${e.empresa}" style="color: var(--text-dim);"></td>
                 <td>
-                    <a th:href="@{'/Admin/experiencia/eliminar/' + ${e.id}}"
+                    <a th:href="@{'/admin/experiencia/eliminar/' + ${e.id}}"
                        class="btn-delete"
                        onclick="return confirm('¿Confirmar eliminación de registro?')">
                         <i class="fa-solid fa-trash"></i> ELIMINAR
@@ -55,7 +55,7 @@
     </div>
 
     <div class="form-card">
-        <form th:action="@{/Admin/experiencia/guardar}" th:object="${experiencia}" method="post">
+        <form th:action="@{/admin/experiencia/guardar}" th:object="${experiencia}" method="post">
             <input type="hidden" th:field="*{id}">
 
             <div class="form-group">
@@ -90,7 +90,7 @@
                     <span th:text="${experiencia.id != 0} ? 'GUARDAR_CAMBIOS' : 'EJECUTAR_INSERCIÓN'"></span>
                 </button>
 
-                <a th:if="${experiencia.id != 0}" th:href="@{/Admin/experiencia}" class="btn-back" style="margin-bottom: 0;">
+                <a th:if="${experiencia.id != 0}" th:href="@{/admin/experiencia}" class="btn-back" style="margin-bottom: 0;">
                     CANCELAR_OPERACIÓN
                 </a>
             </div>

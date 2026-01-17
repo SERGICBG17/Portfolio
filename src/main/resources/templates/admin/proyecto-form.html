@@ -9,7 +9,7 @@
 <body>
 
 <div class="container">
-    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_DASHBOARD</a>
+    <a th:href="@{/admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_DASHBOARD</a>
     <h1><i class="fa-solid fa-rocket" style="color: var(--accent); margin-right: 15px;"></i>ACTIVE_DEPLOYMENTS</h1>
 
     <table class="data-table">
@@ -22,9 +22,9 @@
         </thead>
         <tbody>
         <tr th:each="p : ${proyectos}">
-            <td><a th:href="@{'/Admin/proyectos/editar/' + ${p.id}}" th:text="${p.nombre}" class="nombre-clickable"></a></td>
+            <td><a th:href="@{'/admin/proyectos/editar/' + ${p.id}}" th:text="${p.nombre}" class="nombre-clickable"></a></td>
             <td th:text="${p.github_url}" style="font-size: 11px; color: var(--text-dim); font-family: 'Fira Code';"></td>
-            <td><a th:href="@{'/Admin/proyectos/eliminar/' + ${p.id}}" class="btn-delete" onclick="return confirm('¿Eliminar proyecto?')"><i class="fa-solid fa-trash"></i></a></td>
+            <td><a th:href="@{'/admin/proyectos/eliminar/' + ${p.id}}" class="btn-delete" onclick="return confirm('¿Eliminar proyecto?')"><i class="fa-solid fa-trash"></i></a></td>
         </tr>
         </tbody>
     </table>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-card">
-        <form th:action="@{/Admin/proyectos/guardar}" th:object="${proyecto}" method="post">
+        <form th:action="@{/admin/proyectos/guardar}" th:object="${proyecto}" method="post">
             <input type="hidden" th:field="*{id}">
             <div class="form-group">
                 <label>PROJECT_NAME</label>
@@ -61,7 +61,7 @@
             <button type="submit">
                 <i class="fa-solid fa-upload"></i> [[${proyecto.id != 0} ? 'PUSH_CHANGES' : 'LAUNCH_PROJECT']]
             </button>
-            <a th:if="${proyecto.id != 0}" th:href="@{/Admin/proyectos}" class="btn-back" style="margin-left: 20px;">ABORT_OPERATION</a>
+            <a th:if="${proyecto.id != 0}" th:href="@{/admin/proyectos}" class="btn-back" style="margin-left: 20px;">ABORT_OPERATION</a>
         </form>
     </div>
 </div>
