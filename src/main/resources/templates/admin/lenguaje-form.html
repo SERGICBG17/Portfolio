@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Admin | Tech_Stack</title>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
 </head>
 <body>
+<div class="container">
+    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
+    <h1><i class="fa-solid fa-microchip" style="color: var(--accent); margin-right: 15px;"></i>TECH_STACK_INVENTORY</h1>
 
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>Tecnología / Framework</th>
+            <th>Icon_Source</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="l : ${lenguajes}">
+            <td class="txt-mono"><a th:href="@{'/Admin/lenguajes/editar/' + ${l.id}}" th:text="${l.nombre}" class="nombre-clickable"></a></td>
+            <td th:text="${l.icono_url}" style="font-size: 11px; color: var(--text-dim);"></td>
+            <td><a th:href="@{'/Admin/lenguajes/eliminar/' + ${l.id}}" class="btn-delete" onclick="return confirm('¿Borrar tecnología?')"><i class="fa-solid fa-xmark"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top:50px; border-top: 1px dashed var(--border); padding-top:20px;">
+        <h2 th:text="${lenguaje.id != 0} ? 'EDIT_TECH_MODULE' : 'REGISTER_NEW_TECH'"></h2>
+    </div>
+
+    <div class="form-card">
+        <form th:action="@{/Admin/lenguajes/guardar}" th:object="${lenguaje}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group-inline" style="grid-template-columns: 1fr 2fr;">
+                <div class="form-group">
+                    <label>TECH_NAME</label>
+                    <input type="text" th:field="*{nombre}" required placeholder="Ej: Java">
+                </div>
+                <div class="form-group">
+                    <label>ICON_URL (.SVG / .PNG)</label>
+                    <input type="text" th:field="*{icono_url}" placeholder="URL del icono">
+                </div>
+            </div>
+            <button type="submit">
+                <i class="fa-solid fa-terminal"></i> [[${lenguaje.id != 0} ? 'UPDATE_MODULE' : 'COMMIT_TECH']]
+            </button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

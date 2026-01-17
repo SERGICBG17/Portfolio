@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Formación</title>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
 </head>
 <body>
+<div class="container">
+    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
+    <h1><i class="fa-solid fa-graduation-cap" style="color: var(--accent); margin-right: 15px;"></i>KNOWLEDGE_BASE</h1>
 
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>Certificación / Título</th>
+            <th>Institución</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="est : ${estudios}">
+            <td><a th:href="@{'/Admin/estudios/editar/' + ${est.id}}" th:text="${est.titulo}" class="nombre-clickable"></a></td>
+            <td th:text="${est.institucion}" style="color: var(--text-dim);"></td>
+            <td><a th:href="@{'/Admin/estudios/eliminar/' + ${est.id}}" class="btn-delete" onclick="return confirm('¿Borrar estudio?')"><i class="fa-solid fa-trash"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top:50px; border-top: 1px dashed var(--border); padding-top:20px;">
+        <h2 th:text="${estudio.id != 0} ? 'EDITAR_CERTIFICACION' : 'REGISTRAR_NUEVO_TITULO'"></h2>
+    </div>
+
+    <div class="form-card">
+        <form th:action="@{/Admin/estudios/guardar}" th:object="${estudio}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label>DEGREE_TITLE</label>
+                <input type="text" th:field="*{titulo}" required placeholder="Ej: Grado Superior en DAM">
+            </div>
+            <div class="form-group">
+                <label>INSTITUTION_NAME</label>
+                <input type="text" th:field="*{institucion}" required placeholder="Nombre del centro educativo">
+            </div>
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label>START_DATE</label>
+                    <input type="date" th:field="*{fecha_inicio}">
+                </div>
+                <div class="form-group">
+                    <label>COMPLETION_DATE</label>
+                    <input type="date" th:field="*{fecha_fin}">
+                </div>
+            </div>
+            <button type="submit">
+                <i class="fa-solid fa-floppy-disk"></i> [[${estudio.id != 0} ? 'GUARDAR_CAMBIOS' : 'AÑADIR_ESTUDIO']]
+            </button>
+            <a th:if="${estudio.id != 0}" th:href="@{/Admin/estudios}" class="btn-back" style="margin-left:15px;">CANCELAR</a>
+        </form>
+    </div>
+</div>
 </body>
 </html>

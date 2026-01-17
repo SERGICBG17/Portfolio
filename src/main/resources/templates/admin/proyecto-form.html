@@ -1,10 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Admin | Project_History</title>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
 </head>
 <body>
 
+<div class="container">
+    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_DASHBOARD</a>
+    <h1><i class="fa-solid fa-rocket" style="color: var(--accent); margin-right: 15px;"></i>ACTIVE_DEPLOYMENTS</h1>
+
+    <table class="data-table">
+        <thead>
+        <tr>
+            <th>Nombre del Proyecto</th>
+            <th>GitHub_Reference</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${proyectos}">
+            <td><a th:href="@{'/Admin/proyectos/editar/' + ${p.id}}" th:text="${p.nombre}" class="nombre-clickable"></a></td>
+            <td th:text="${p.github_url}" style="font-size: 11px; color: var(--text-dim); font-family: 'Fira Code';"></td>
+            <td><a th:href="@{'/Admin/proyectos/eliminar/' + ${p.id}}" class="btn-delete" onclick="return confirm('¿Eliminar proyecto?')"><i class="fa-solid fa-trash"></i></a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top:50px; border-top: 1px dashed var(--border); padding-top:30px;">
+        <h2 th:text="${proyecto.id != 0} ? 'EDIT_PROJECT_DATA' : 'CREATE_NEW_DEPLOYMENT'"></h2>
+    </div>
+
+    <div class="form-card">
+        <form th:action="@{/Admin/proyectos/guardar}" th:object="${proyecto}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label>PROJECT_NAME</label>
+                <input type="text" th:field="*{nombre}" required>
+            </div>
+            <div class="form-group">
+                <label>OVERVIEW_DESCRIPTION</label>
+                <textarea th:field="*{descripcion}" rows="3"></textarea>
+            </div>
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label>REPOSITORY_URL</label>
+                    <input type="url" th:field="*{github_url}">
+                </div>
+                <div class="form-group">
+                    <label>PREVIEW_IMAGE_URL</label>
+                    <input type="text" th:field="*{imagen_url}">
+                </div>
+            </div>
+            <div class="form-group" style="width: 200px;">
+                <label>RELEASE_DATE</label>
+                <input type="date" th:field="*{fecha}">
+            </div>
+            <button type="submit">
+                <i class="fa-solid fa-upload"></i> [[${proyecto.id != 0} ? 'PUSH_CHANGES' : 'LAUNCH_PROJECT']]
+            </button>
+            <a th:if="${proyecto.id != 0}" th:href="@{/Admin/proyectos}" class="btn-back" style="margin-left: 20px;">ABORT_OPERATION</a>
+        </form>
+    </div>
+</div>
 </body>
 </html>

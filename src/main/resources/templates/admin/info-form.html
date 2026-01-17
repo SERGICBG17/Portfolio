@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | System_Info</title>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
 </head>
 <body>
+<div class="container">
+    <a th:href="@{/Admin}" class="btn-back"><i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL</a>
+    <h1><i class="fa-solid fa-user-gear" style="color: var(--accent); margin-right: 15px;"></i>CORE_IDENTITY_CONFIG</h1>
 
+    <div class="form-card">
+        <form th:action="@{/Admin/info/guardar}" th:object="${info}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label>FULL_NAME</label>
+                <input type="text" th:field="*{nombre}" required>
+            </div>
+            <div class="form-group">
+                <label>EMAIL_ADDRESS</label>
+                <input type="email" th:field="*{email}" required>
+            </div>
+            <div class="form-group">
+                <label>ABSTRACT_DESCRIPTION (Sobre Mí)</label>
+                <textarea th:field="*{descripcion}" rows="5" placeholder="Escribe tu perfil profesional..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>PROFILE_PICTURE_URL</label>
+                <input type="text" th:field="*{foto_url}" placeholder="https://link-a-tu-foto.jpg">
+            </div>
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label>LINKEDIN_URL</label>
+                    <input type="url" th:field="*{linkedin}">
+                </div>
+                <div class="form-group">
+                    <label>GITHUB_PROFILE</label>
+                    <input type="url" th:field="*{github}">
+                </div>
+            </div>
+            <button type="submit">
+                <i class="fa-solid fa-sync"></i> ACTUALIZAR_IDENTITY_LOGS
+            </button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

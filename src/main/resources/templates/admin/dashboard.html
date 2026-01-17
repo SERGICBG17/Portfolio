@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Sergio</title>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
 </head>
 <body>
+<div class="blueprint-grid"></div>
 
+<div class="admin-layout">
+    <aside class="sidebar">
+        <div class="sys-label"><span>SYS</span> ADMIN_v1.0</div>
+        <h2>Panel de Control</h2>
+        <nav class="nav-group">
+            <a th:href="@{/}" class="nav-link">Ir a la Web</a>
+            <a th:href="@{/Admin}" class="nav-link active">Dashboard</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header-section">
+            <div class="status-bar">
+                <span class="pulse"></span> SYSTEM_ONLINE
+            </div>
+            <h1>Gestión de Contenidos</h1>
+            <p class="subtitle">// Selecciona un módulo para actualizar la base de datos.</p>
+        </header>
+
+        <div class="admin-grid">
+            <a th:href="@{/Admin/proyectos}" class="admin-card">
+                <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
+                <div class="card-info">
+                    <h3>PROYECTOS</h3>
+                    <p>Spring Boot, Unity, Mobile.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+
+            <a th:href="@{/Admin/experiencia}" class="admin-card">
+                <div class="card-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <div class="card-info">
+                    <h3>EXPERIENCIA</h3>
+                    <p>Historial profesional y logs.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+
+            <a th:href="@{/Admin/estudios}" class="admin-card">
+                <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="card-info">
+                    <h3>EDUCACIÓN</h3>
+                    <p>Títulos DAM, SMR y certificados.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+
+            <a th:href="@{/Admin/lenguajes}" class="admin-card">
+                <div class="card-icon"><i class="fa-solid fa-microchip"></i></div>
+                <div class="card-info">
+                    <h3>STACK TÉCNICO</h3>
+                    <p>Habilidades y logos (.svg)</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+
+            <a th:href="@{/Admin/info}" class="admin-card card-full">
+                <div class="card-icon"><i class="fa-solid fa-user-gear"></i></div>
+                <div class="card-info">
+                    <h3>SOBRE MÍ</h3>
+                    <p>Foto de perfil, descripción y metadatos personales.</p>
+                </div>
+                <div class="card-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </a>
+        </div>
+    </main>
+</div>
 </body>
 </html>

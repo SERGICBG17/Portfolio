@@ -1,10 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Gestión de Experiencia</title>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/formulario.css}">
 </head>
 <body>
+<div class="blueprint-grid"></div>
 
+<div class="container">
+    <a th:href="@{/Admin}" class="btn-back">
+        <i class="fa-solid fa-arrow-left"></i> VOLVER_AL_PANEL
+    </a>
+
+    <header style="margin-bottom: 40px;">
+        <h1><i class="fa-solid fa-briefcase" style="color: var(--accent); margin-right: 15px;"></i>Gestión de Experiencia</h1>
+        <p style="color: var(--text-dim); font-size: 14px;">Administra el historial de despliegues y roles profesionales.</p>
+    </header>
+
+    <section>
+        <h2 style="margin-bottom: 15px; font-size: 12px; opacity: 0.7;">[DATABASE_ENTRIES]</h2>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>Puesto (Click para editar)</th>
+                <th>Empresa</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="e : ${experiencias}">
+                <td>
+                    <a th:href="@{'/Admin/experiencia/editar/' + ${e.id}}"
+                       th:text="${e.puesto}"
+                       class="nombre-clickable"></a>
+                </td>
+                <td th:text="${e.empresa}" style="color: var(--text-dim);"></td>
+                <td>
+                    <a th:href="@{'/Admin/experiencia/eliminar/' + ${e.id}}"
+                       class="btn-delete"
+                       onclick="return confirm('¿Confirmar eliminación de registro?')">
+                        <i class="fa-solid fa-trash"></i> ELIMINAR
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <div style="margin-top:60px; border-top: 1px dashed var(--border); padding-top:30px;">
+        <h2 th:text="${experiencia.id != 0} ? 'EDITAR_REGISTRO' : 'AÑADIR_NUEVA_ENTRADA'"></h2>
+    </div>
+
+    <div class="form-card">
+        <form th:action="@{/Admin/experiencia/guardar}" th:object="${experiencia}" method="post">
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label>PUESTO_TITLE</label>
+                <input type="text" th:field="*{puesto}" placeholder="Ej: Full Stack Developer" required>
+            </div>
+
+            <div class="form-group">
+                <label>COMPANY_NAME</label>
+                <input type="text" th:field="*{empresa}" placeholder="Nombre de la organización">
+            </div>
+
+            <div class="form-group">
+                <label>DESCRIPTION_LOG</label>
+                <textarea th:field="*{descripcion}" rows="4" placeholder="Detalla las tecnologías y logros..."></textarea>
+            </div>
+
+            <div class="form-group-inline">
+                <div class="form-group">
+                    <label>START_DATE</label>
+                    <input type="text" th:field="*{fecha_inicio}" placeholder="Ej: Enero 2022">
+                </div>
+                <div class="form-group">
+                    <label>END_DATE</label>
+                    <input type="text" th:field="*{fecha_fin}" placeholder="Ej: Presente o Dic 2023">
+                </div>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 20px; margin-top: 10px;">
+                <button type="submit">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span th:text="${experiencia.id != 0} ? 'GUARDAR_CAMBIOS' : 'EJECUTAR_INSERCIÓN'"></span>
+                </button>
+
+                <a th:if="${experiencia.id != 0}" th:href="@{/Admin/experiencia}" class="btn-back" style="margin-bottom: 0;">
+                    CANCELAR_OPERACIÓN
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer style="text-align: center; margin-top: 50px; opacity: 0.3; font-family: var(--font-mono); font-size: 10px;">
+    CORE_SYSTEM_ADMIN_INTERFACE_2026
+</footer>
 </body>
 </html>

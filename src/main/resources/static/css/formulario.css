@@ -1,0 +1,158 @@
+:root {
+    --bg: #0a0c10;
+    --panel: #12151c;
+    --accent: #3b82f6;
+    --danger: #ef4444;
+    --border: rgba(255, 255, 255, 0.08);
+    --text-dim: #8b949e;
+    --font-mono: 'Fira Code', monospace;
+}
+
+body {
+    background-color: var(--bg);
+    color: #f0f6fc;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* BOTÓN VOLVER */
+.btn-back {
+    display: inline-block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+.btn-back:hover { color: var(--accent); }
+
+h1 { font-size: 1.8rem; margin-bottom: 30px; letter-spacing: -1px; }
+
+/* TABLA DE DATOS */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 50px;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 15px;
+    background: rgba(255,255,255,0.02);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+}
+
+.data-table td {
+    padding: 15px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+}
+
+.nombre-clickable {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.nombre-clickable:hover { color: var(--accent); }
+
+.btn-delete {
+    color: var(--danger);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 5px 10px;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 4px;
+    transition: 0.3s;
+}
+.btn-delete:hover { background: var(--danger); color: white; }
+
+/* FORMULARIO */
+.form-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+h2 {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    background: #0d1117;
+    border: 1px solid var(--border);
+    padding: 12px;
+    color: white;
+    border-radius: 6px;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* BOTÓN GUARDAR */
+button[type="submit"] {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    filter: brightness(1.2);
+    transform: translateY(-1px);
+}
+
+/* Ajuste para fechas en línea */
+.form-group-inline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
