@@ -27,17 +27,50 @@ spring.thymeleaf.cache=false
 
 # Carga de datos iniciales
 spring.sql.init.mode=always
+
+# Servidor SMTP de Gmail
+spring.mail.host=smtp.gmail.com
+# Puerto SMTP (587 para TLS, 465 para SSL)
+spring.mail.port=587
+spring.mail.username=tu_mail
+spring.mail.password=xxxx xxxx xxxx xxxx
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
 ```
 
 ## Estructura y Navegación
 
 ### Vista Pública
 Es la página principal (`/`) donde se muestra la información profesional procesada íntegramente desde la base de datos. Se compone de las siguientes secciones dinámicas:
-<img width="1873" height="900" alt="image" src="https://github.com/user-attachments/assets/5fcf3fdd-8cd7-46e4-b84f-930aa9971eaf" />
+<img width="2502" height="1178" alt="image" src="https://github.com/user-attachments/assets/ee366dd1-0b66-4116-ae08-059ff836a0e3" />
 
 * **Información Personal:** Biografía, foto y datos de contacto cargados desde la tabla `info`.
 * **Trayectoria:** Listado cronológico de experiencia laboral y formación académica.
 * **Proyectos:** Galería de trabajos con visualización de tecnologías asociadas.
+
+## Seguridad y Comunicaciones
+
+Para garantizar la integridad de los datos y facilitar la comunicación directa, el proyecto implementa dos módulos críticos:
+
+### 1. Sistema de Seguridad (Spring Security)
+La zona de administración está protegida mediante un robusto sistema de autenticación y autorización.
+
+<img width="2520" height="1141" alt="image" src="https://github.com/user-attachments/assets/3d970c70-10cd-4032-b3ce-a14d76c15815" />
+
+* **Autenticación:** Acceso restringido mediante credenciales encriptadas con **BCrypt**.
+* **Autorización:** Implementación de roles (`ADMIN`, `USER`) para el control de acceso a las rutas CRUD bajo el prefijo `/admin/**`.
+* **Protección de Recursos:** Configuración de políticas de seguridad para permitir el acceso público a recursos estáticos (CSS, JS, imágenes y fuentes) manteniendo bloqueada la lógica de gestión.
+* **Gestión de Sesiones:** Control de inicio y cierre de sesión seguro mediante el motor de seguridad de Spring.
+
+### 2. Canal de Contacto y Mensajería (SMTP)
+Se ha integrado un servicio de mensajería asíncrono que permite a los visitantes enviar correos electrónicos directamente desde la web.
+
+<img width="2487" height="1170" alt="image" src="https://github.com/user-attachments/assets/00821282-6fd3-40ab-85ba-b64c34c0b1eb" />
+
+* **Integración SMTP:** Uso de `Spring Boot Starter Mail` para la conexión con servidores de correo (Gmail).
+* **Protocolo Seguro:** Implementación sobre los puertos **587 (TLS)** o **465 (SSL)** utilizando contraseñas de aplicación cifradas.
+* **Validación de Datos:** Los formularios de contacto validan el formato del remitente y el contenido antes de procesar el envío.
+* **Feedback de Usuario:** Notificaciones visuales sobre el estado del envío (éxito o fallo del sistema) mediante atributos dinámicos de **Thymeleaf**.
 
 ### Panel de Administración (Acceso CRUD)
 Para gestionar el contenido sin necesidad de modificar el código fuente, la aplicación incluye una zona privada de administración.
