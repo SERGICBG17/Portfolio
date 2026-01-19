@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REGISTER_USER | Sergio Casín</title>
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/loginyregistro.css}">
+</head>
+<body>
+<div class="blueprint-grid"></div>
+
+<div class="auth-panel">
+    <div class="auth-tag"><span>SYS</span> CREATE_NEW_NODE</div>
+    <h1>Registrar Usuario</h1>
+
+    <div th:if="${error}" class="alert alert-error" th:text="${'> ' + error}"></div>
+
+    <form th:action="@{/registro}" method="post">
+        <div class="form-group">
+            <label>Nombre_Usuario</label>
+            <div class="input-wrapper">
+                <i class="fas fa-user-circle"></i>
+                <input type="text" name="username" placeholder="Nuevo alias" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Email_Protocol</label>
+            <div class="input-wrapper">
+                <i class="fas fa-at"></i>
+                <input type="email" name="email" placeholder="email@servidor.com" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Seguridad_Key</label>
+            <div class="input-wrapper">
+                <i class="fas fa-fingerprint"></i>
+                <input type="password" name="password" placeholder="Password" required>
+            </div>
+            <p class="password-hint">Longitud mínima: 6 carac.</p>
+        </div>
+
+        <button type="submit" class="btn-auth">Inicializar Registro</button>
+    </form>
+
+    <div class="links">
+        <p>¿Nodo existente? <a th:href="@{/login}">Volver al login</a></p>
+        <p style="margin-top: 10px;"><a th:href="@{/}">_Volver al inicio</a></p>
+    </div>
+</div>
+</body>
+</html>

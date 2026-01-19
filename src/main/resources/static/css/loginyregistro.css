@@ -1,0 +1,195 @@
+/* loginyregistro.css */
+:root {
+    --bg: #050505;
+    --panel: rgba(13, 13, 16, 0.9);
+    --accent: #3b82f6;
+    --border: rgba(255, 255, 255, 0.08);
+    --font-mono: 'Fira Code', monospace;
+    --neon-green: #10b981;
+}
+
+body {
+    background-color: var(--bg);
+    color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Reutilizamos tu Rejilla Técnica de fondo */
+.blueprint-grid {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: -1;
+    mask-image: radial-gradient(circle at center, black, transparent 95%);
+}
+
+/* Contenedor estilo Panel Bento */
+.auth-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent);
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+.auth-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.auth-tag span {
+    background: var(--accent);
+    color: white;
+    padding: 2px 6px;
+    margin-right: 10px;
+}
+
+h1 {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 12px;
+    color: var(--accent);
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    padding: 12px 12px 12px 40px;
+    color: white;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+/* Botón estilo Terminal */
+.btn-auth {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.btn-auth:hover {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 0 15px var(--accent);
+}
+
+/* Alertas */
+.alert {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-left: 3px solid;
+}
+.alert-error { background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: #ef4444; }
+.alert-success { background: rgba(16, 185, 129, 0.1); color: var(--neon-green); border-color: var(--neon-green); }
+
+.links {
+    margin-top: 25px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.links a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.links a:hover {
+    color: white;
+    text-shadow: 0 0 8px var(--accent);
+}
+
+.password-hint { font-size: 10px; color: #475569; margin-top: 5px; }
+
+textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border);
+    color: white;
+    font-family: var(--font-mono);
+    padding: 12px;
+    border-radius: 4px;
+    resize: vertical; /* Permite al usuario estirar el cuadro hacia abajo */
+    min-height: 120px;
+    box-sizing: border-box;
+    transition: 0.3s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+/* Ajuste para iconos en el formulario de contacto */
+.input-wrapper textarea {
+    padding-left: 12px; /* Las áreas de texto no suelen llevar icono dentro */
+}
