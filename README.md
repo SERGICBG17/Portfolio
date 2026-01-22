@@ -6,7 +6,7 @@ Este proyecto consiste en un CV web interactivo y dinámico desarrollado con **S
 
 * Java JDK 17 o superior.
 * Maven 3.6+.
-* Base de datos (H2, MySQL o PostgreSQL) según configuración.
+* Base de datos (MySQL o PostgreSQL) según configuración.
 
 ## Configuración e Instalación
 
@@ -83,7 +83,6 @@ Desde este panel se pueden realizar operaciones **CRUD completas** sobre las 6 t
 * **Altas:** Añadir nuevos proyectos, experiencias o estudios.
 * **Bajas:** Eliminar registros obsoletos de la base de datos.
 * **Modificaciones:** Editar cualquier campo de la trayectoria o información personal.
-* **Gestión N:M:** Asignar y desvincular lenguajes de programación a cada proyecto de forma dinámica.
 
 ---
 
