@@ -15,6 +15,8 @@ Debido a que el archivo de configuración contiene credenciales sensibles, este 
 ### 1. Configurar el entorno (application.properties)
 Crea un archivo llamado `application.properties` dentro de la carpeta `src/main/resources/` con el siguiente contenido base:
 
+(antes de ello deberas crear la base de datos que se llama portfolio_db)
+
 ```properties
 # Configuración de la Base de Datos
 spring.datasource.url=jdbc:mysql://localhost:3306/portfolio_db
@@ -26,6 +28,7 @@ spring.jpa.hibernate.ddl-auto=update
 spring.thymeleaf.cache=false
 
 # Carga de datos iniciales
+# Cambia 'always' por 'never' una vez que se hayan cargado
 spring.sql.init.mode=always
 
 # Servidor SMTP de Gmail
