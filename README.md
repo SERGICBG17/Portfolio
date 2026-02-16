@@ -2,7 +2,8 @@
 
 ## Descripción del Proyecto
 
-Plataforma web de portfolio personal y currículum profesional construida con **Spring Boot 3** y **Thymeleaf**. Presenta tu información profesional, experiencia, proyectos y habilidades de forma dinámica y atractiva. Incluye un panel de administración completo para gestionar todo el contenido en tiempo real, sistema de contacto integrado, y soporte para múltiples bases de datos (MySQL/H2).
+Plataforma web de portfolio personal y currículum profesional construida con **Spring Boot 3** y **Thymeleaf**. Presenta mi información profesional, experiencia, proyectos y habilidades de forma dinámica y atractiva. Incluye un panel de administración completo para gestionar todo el contenido en tiempo real, sistema de contacto integrado, y soporte para múltiples bases de datos (MySQL/H2).
+
 
 <img width="2502" height="1178" alt="image" src="https://github.com/user-attachments/assets/ee366dd1-0b66-4116-ae08-059ff836a0e3" />
 
@@ -217,7 +218,7 @@ Una vez iniciada la aplicación, acceda a través de:
 
 ### Panel de Administración
 
-Acceda al panel de administración en `http://localhost:8080/admin` para gestionar:
+Acceda al panel de administración en `http://localhost:8080/admin` para gestionar su información profesional:
 
 - **Información Personal:** Nombre, título profesional, biografía, foto de perfil
 - **Experiencia Laboral:** Empresas, cargos, períodos, descripciones
@@ -228,7 +229,16 @@ Acceda al panel de administración en `http://localhost:8080/admin` para gestion
 
 ### Datos Iniciales
 
-Para poblar el portfolio con datos de ejemplo, cree o edite el archivo `src/main/resources/data.sql` con sus inserciones SQL. Este archivo se ejecutará automáticamente al iniciar la aplicación.
+Para poblar el portfolio con su información personal, cree o edite el archivo `src/main/resources/data.sql` con sus datos profesionales. Este archivo se ejecutará automáticamente al iniciar la aplicación.
+
+**Ejemplo de estructura:**
+```sql
+INSERT INTO personal_info (nombre, titulo, biografia, email) VALUES 
+('Su Nombre', 'Desarrollador Full Stack', 'Su biografía profesional...', 'su-email@ejemplo.com');
+
+INSERT INTO experiencia (empresa, cargo, fecha_inicio, fecha_fin, descripcion) VALUES 
+('Empresa XYZ', 'Desarrollador Senior', '2020-01-01', '2023-12-31', 'Descripción de responsabilidades...');
+```
 
 ---
 
@@ -254,7 +264,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=prod
 
 ### Personalización de Estilos
 
-Los archivos CSS y recursos estáticos se encuentran en `src/main/resources/static/`. Puede modificarlos para ajustar la apariencia del portfolio.
+Los archivos CSS y recursos estáticos se encuentran en `src/main/resources/static/`. Modifíquelos para personalizar la apariencia de su portfolio según su marca personal.
 
 ---
 
@@ -308,30 +318,21 @@ Antes de ejecutar la aplicación, verifique:
 - [ ] Java 17+ instalado y configurado
 - [ ] Maven instalado y en PATH
 - [ ] Repositorio clonado correctamente
-- [ ] `application.properties` configurado con sus datos
+- [ ] `application.properties` configurado con sus datos personales
 - [ ] Base de datos MySQL creada (si aplica)
 - [ ] Contraseña de aplicación Gmail generada
 - [ ] Puerto 8080 disponible (o alternativo configurado)
 - [ ] Dependencias de Maven descargadas
+- [ ] Archivo `data.sql` con su información profesional (opcional)
 
 ---
-
-## Despliegue en Producción
-
-Para desplegar el portfolio en un servidor de producción:
-
-1. Configure MySQL como base de datos
-2. Utilice variables de entorno para datos sensibles
-3. Compile el proyecto: `mvn clean package -DskipTests`
-4. Ejecute el JAR en el servidor
-5. Configure un proxy inverso (Nginx/Apache) si es necesario
-6. Considere usar un dominio personalizado
-
----
-
 
 ## Licencia
 
-Este proyecto está bajo la Licencia MIT
+Este proyecto está bajo la Licencia MIT.
 
 ---
+
+---
+
+**Desarrollado por Sergio Casín**
