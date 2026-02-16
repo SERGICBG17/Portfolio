@@ -1,129 +1,337 @@
-# Portfolio Personal - Spring Boot
+# Portfolio Personal - Guía de Instalación y Configuración
 
-Este proyecto consiste en un CV web interactivo y dinámico desarrollado con **Spring Boot 3.x**. La aplicación permite mostrar información profesional, formación académica, experiencia laboral y proyectos realizados, gestionando todo el contenido a través de una base de datos.
+## Descripción del Proyecto
+
+Plataforma web de portfolio personal y currículum profesional construida con **Spring Boot 3** y **Thymeleaf**. Presenta tu información profesional, experiencia, proyectos y habilidades de forma dinámica y atractiva. Incluye un panel de administración completo para gestionar todo el contenido en tiempo real, sistema de contacto integrado, y soporte para múltiples bases de datos (MySQL/H2).
+
+<img width="2502" height="1178" alt="image" src="https://github.com/user-attachments/assets/ee366dd1-0b66-4116-ae08-059ff836a0e3" />
+
+---
+
+## Tabla de Contenidos
+
+1. [Requisitos Previos](#requisitos-previos)
+2. [Instalación](#instalación)
+3. [Configuración de Base de Datos](#configuración-de-base-de-datos)
+4. [Configuración de Email](#configuración-de-email)
+5. [Ejecución de la Aplicación](#ejecución-de-la-aplicación)
+6. [Acceso a la Aplicación](#acceso-a-la-aplicación)
+7. [Personalización del Portfolio](#personalización-del-portfolio)
+8. [Configuración Avanzada](#configuración-avanzada)
+9. [Resolución de Problemas](#resolución-de-problemas)
+
+---
 
 ## Requisitos Previos
 
-* Java JDK 17 o superior.
-* Maven 3.6+.
-* Base de datos (MySQL o PostgreSQL) según configuración.
+Antes de comenzar, asegúrese de tener instalados los siguientes componentes:
 
-## Configuración e Instalación
+- **Java JDK 17 o superior** - [Descargar](https://www.oracle.com/java/technologies/downloads/)
+- **Maven 3.6 o superior** - [Descargar](https://maven.apache.org/download.cgi)
+- **Git** - [Descargar](https://git-scm.com/downloads)
+- **MySQL 8.0 o superior** (Opcional - recomendado para producción) - [Descargar](https://dev.mysql.com/downloads/)
+- IDE de desarrollo (IntelliJ IDEA, Eclipse o Visual Studio Code)
 
-Debido a que el archivo de configuración contiene credenciales sensibles, este se encuentra ignorado en el repositorio. Sigue estos pasos para poner en marcha el proyecto:
+### Verificación de Requisitos
 
-### 1. Configurar el entorno (application.properties)
-Crea un archivo llamado `application.properties` dentro de la carpeta `src/main/resources/` con el siguiente contenido base:
+Ejecute los siguientes comandos para verificar las instalaciones:
+```bash
+java -version
+mvn -version
+git --version
+```
 
-(antes de ello deberas crear la base de datos que se llama portfolio_db)
+---
 
+## Instalación
+
+### Paso 1: Clonar el Repositorio
+```bash
+git clone https://github.com/SERGICBG17/Portfolio.git
+cd Portfolio
+```
+
+### Paso 2: Configurar application.properties
+
+Navegue al archivo `src/main/resources/application.properties` y configure las propiedades según sus necesidades. A continuación se presenta la plantilla completa:
 ```properties
-# Configuración de la Base de Datos
-spring.datasource.url=jdbc:mysql://localhost:3306/portfolio_db
-spring.datasource.username=tu_usuario
-spring.datasource.password=tu_contraseña
-spring.jpa.hibernate.ddl-auto=update
+spring.application.name=Portfolio
 
-# Configuración de Thymeleaf
+# ========================================
+# CONFIGURACIÓN DEL SERVIDOR
+# ========================================
+server.port=8080
+
+# Hidden Method Filter (para formularios PUT/DELETE)
+spring.mvc.hiddenmethod.filter.enabled=true
+
+# ========================================
+# THYMELEAF
+# ========================================
 spring.thymeleaf.cache=false
 
-# Carga de datos iniciales
-# Cambia 'always' por 'never' una vez que se hayan cargado
-spring.sql.init.mode=always
+# ========================================
+# JPA/HIBERNATE
+# ========================================
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
 
-# Servidor SMTP de Gmail
+# ========================================
+# SQL INITIALIZATION
+# ========================================
+spring.sql.init.mode=always
+spring.sql.init.encoding=UTF-8
+spring.jpa.defer-datasource-initialization=true
+
+# ========================================
+# CONFIGURACIÓN DE EMAIL (Gmail SMTP)
+# ========================================
 spring.mail.host=smtp.gmail.com
-# Puerto SMTP (587 para TLS, 465 para SSL)
 spring.mail.port=587
-spring.mail.username=tu_mail
+spring.mail.username=tu-email@gmail.com
 spring.mail.password=xxxx xxxx xxxx xxxx
 spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
+
+# ========================================
+# H2 CONSOLE
+# ========================================
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+
+# ========================================
+# LOGGING
+# ========================================
+logging.level.org.springframework=INFO
+logging.level.org.hibernate.SQL=DEBUG
 ```
 
-## Estructura y Navegación
+---
 
-### Vista Pública
-Es la página principal (`/`) donde se muestra la información profesional procesada íntegramente desde la base de datos. Se compone de las siguientes secciones dinámicas:
-<img width="2502" height="1178" alt="image" src="https://github.com/user-attachments/assets/ee366dd1-0b66-4116-ae08-059ff836a0e3" />
+## Configuración de Base de Datos
 
-* **Información Personal:** Biografía, foto y datos de contacto cargados desde la tabla `info`.
-* **Trayectoria:** Listado cronológico de experiencia laboral y formación académica.
-* **Proyectos:** Galería de trabajos con visualización de tecnologías asociadas.
+La aplicación soporta dos modos de persistencia: H2 (desarrollo) y MySQL (producción).
 
-## Seguridad y Comunicaciones
+### Opción A: Base de Datos H2 (Desarrollo)
 
-Para garantizar la integridad de los datos y facilitar la comunicación directa, el proyecto implementa dos módulos críticos:
+**Configuración por defecto.** No requiere pasos adicionales.
 
-### 1. Sistema de Seguridad (Spring Security)
-La zona de administración está protegida mediante un robusto sistema de autenticación y autorización.
+**Características:**
+- Base de datos en memoria
+- Configuración automática
+- Ideal para desarrollo y pruebas
+- Los datos se reinician al detener la aplicación
 
-<img width="2520" height="1141" alt="image" src="https://github.com/user-attachments/assets/3d970c70-10cd-4032-b3ce-a14d76c15815" />
+### Opción B: Base de Datos MySQL (Producción)
 
-* **Autenticación:** Acceso restringido mediante credenciales encriptadas con **BCrypt**.
-* **Autorización:** Implementación de roles (`ADMIN`, `USER`) para el control de acceso a las rutas CRUD bajo el prefijo `/admin/**`.
-* **Protección de Recursos:** Configuración de políticas de seguridad para permitir el acceso público a recursos estáticos (CSS, JS, imágenes y fuentes) manteniendo bloqueada la lógica de gestión.
-* **Gestión de Sesiones:** Control de inicio y cierre de sesión seguro mediante el motor de seguridad de Spring.
+#### Paso 1: Crear la Base de Datos
 
-### 2. Canal de Contacto y Mensajería (SMTP)
-Se ha integrado un servicio de mensajería asíncrono que permite a los visitantes enviar correos electrónicos directamente desde la web.
+Ejecute el siguiente comando SQL en MySQL:
+```sql
+CREATE DATABASE portfolio_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
-<img width="2487" height="1170" alt="image" src="https://github.com/user-attachments/assets/00821282-6fd3-40ab-85ba-b64c34c0b1eb" />
+#### Paso 2: Configurar la Conexión
 
-* **Integración SMTP:** Uso de `Spring Boot Starter Mail` para la conexión con servidores de correo (Gmail).
-* **Protocolo Seguro:** Implementación sobre los puertos **587 (TLS)** o **465 (SSL)** utilizando contraseñas de aplicación cifradas.
-* **Validación de Datos:** Los formularios de contacto validan el formato del remitente y el contenido antes de procesar el envío.
-* **Feedback de Usuario:** Notificaciones visuales sobre el estado del envío (éxito o fallo del sistema) mediante atributos dinámicos de **Thymeleaf**.
+Añada las siguientes líneas al final de `application.properties`:
+```properties
+# ========================================
+# MYSQL CONFIGURATION
+# ========================================
+spring.datasource.url=jdbc:mysql://localhost:3306/portfolio_db?useSSL=false&serverTimezone=UTC
+spring.datasource.username=tu_usuario_mysql
+spring.datasource.password=tu_contraseña_mysql
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.database-platform=org.hibernate.dialect.MySQL8Dialect
+```
 
-### Panel de Administración (Acceso CRUD)
-Para gestionar el contenido sin necesidad de modificar el código fuente, la aplicación incluye una zona privada de administración.
-<img width="1280" height="609" alt="image" src="https://github.com/user-attachments/assets/ddabbc62-14d6-4f9d-ac2d-3c686f875f46" />
-
-**URL de acceso:** `http://localhost:8080/admin`
-
-Desde este panel se pueden realizar operaciones **CRUD completas** sobre las 6 tablas requeridas en la práctica:
-
-* **Altas:** Añadir nuevos proyectos, experiencias o estudios.
-* **Bajas:** Eliminar registros obsoletos de la base de datos.
-* **Modificaciones:** Editar cualquier campo de la trayectoria o información personal.
+**Parámetros a reemplazar:**
+- `tu_usuario_mysql`: Usuario de MySQL (generalmente `root`)
+- `tu_contraseña_mysql`: Contraseña del usuario MySQL
+- `portfolio_db`: Nombre de la base de datos (modificable según preferencia)
 
 ---
 
-## Arquitectura del Proyecto
+## Configuración de Email
 
-El código sigue el patrón **MVC (Modelo-Vista-Controlador)** con una capa de servicios intermedia para garantizar la separación de responsabilidades y la escalabilidad:
+El formulario de contacto del portfolio utiliza Gmail SMTP para enviar mensajes. Se requiere una contraseña de aplicación específica.
 
-* **Model (Entidades):** Clases JPA (`Info`, `Experiencia`, `Estudios`, `Proyecto`, `Lenguaje`) que definen la estructura y relaciones de la base de datos.
-* **Repository:** Interfaces que extienden de `JpaRepository` para la comunicación fluida con la BD.
-* **Service Layer:** Capa de lógica de negocio que procesa los datos antes de enviarlos a la vista.
-* **Controller:** Gestión de las rutas web tanto para la parte pública como para la zona `/admin`.
-* **Templates:** Vistas dinámicas creadas con **Thymeleaf** que eliminan el uso de contenido estático en el HTML.
+### Generación de Contraseña de Aplicación
 
+1. Acceda a [https://myaccount.google.com/security](https://myaccount.google.com/security)
+2. Active la verificación en dos pasos (si no está activada)
+3. Busque "Contraseñas de aplicaciones"
+4. Seleccione "Correo" como aplicación y "Otro" como dispositivo
+5. Ingrese "Portfolio" como nombre
+6. Copie la contraseña generada (formato: `xxxx xxxx xxxx xxxx`)
 
+### Configuración en application.properties
+```properties
+spring.mail.username=su-email@gmail.com
+spring.mail.password=abcd efgh ijkl mnop
+```
+
+**Importante:** Utilice la contraseña de aplicación generada, no su contraseña personal de Gmail.
+
+---
+
+## Ejecución de la Aplicación
+
+### Método 1: Línea de Comandos
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+### Método 2: IDE
+
+1. Importe el proyecto como proyecto Maven
+2. Localice la clase principal (anotada con `@SpringBootApplication`)
+3. Ejecute la aplicación desde el IDE
+
+### Método 3: JAR Ejecutable
+```bash
+mvn clean package
+java -jar target/Portfolio-0.0.1-SNAPSHOT.jar
+```
 
 ---
 
-## Tecnologías Utilizadas
+## Acceso a la Aplicación
 
-* **Backend:** Spring Boot 3.x, Spring Data JPA.
-* **Frontend:** Thymeleaf, HTML5, CSS3, Bootstrap.
-* **Base de Datos:** MySQL / H2.
-* **Control de Versiones:** Git (GitHub).
+Una vez iniciada la aplicación, acceda a través de:
+
+- **Portfolio público:** `http://localhost:8080`
+- **Panel de administración:** `http://localhost:8080/admin`
+- **Consola H2** (solo con H2): `http://localhost:8080/h2-console`
+
+### Credenciales de H2 Console
+
+- **JDBC URL:** `jdbc:h2:mem:testdb`
+- **Usuario:** `sa`
+- **Contraseña:** (dejar en blanco)
+
+---
+
+## Personalización del Portfolio
+
+### Panel de Administración
+
+Acceda al panel de administración en `http://localhost:8080/admin` para gestionar:
+
+- **Información Personal:** Nombre, título profesional, biografía, foto de perfil
+- **Experiencia Laboral:** Empresas, cargos, períodos, descripciones
+- **Educación:** Instituciones, títulos, fechas
+- **Proyectos:** Nombre, descripción, tecnologías, enlaces
+- **Habilidades:** Tecnologías, niveles de competencia
+- **Redes Sociales:** LinkedIn, GitHub, correo electrónico, etc.
+
+### Datos Iniciales
+
+Para poblar el portfolio con datos de ejemplo, cree o edite el archivo `src/main/resources/data.sql` con sus inserciones SQL. Este archivo se ejecutará automáticamente al iniciar la aplicación.
+
+---
+
+## Configuración Avanzada
+
+### Modificar Puerto del Servidor
+
+Edite la propiedad en `application.properties`:
+```properties
+server.port=8081
+```
+
+### Perfiles de Spring
+
+Para diferentes entornos, cree archivos:
+- `application-dev.properties` (desarrollo)
+- `application-prod.properties` (producción)
+
+Active el perfil deseado:
+```bash
+mvn spring-boot:run -Dspring-boot.run.profiles=prod
+```
+
+### Personalización de Estilos
+
+Los archivos CSS y recursos estáticos se encuentran en `src/main/resources/static/`. Puede modificarlos para ajustar la apariencia del portfolio.
+
+---
+
+## Resolución de Problemas
+
+### Error: "Access denied for user"
+
+**Causa:** Credenciales incorrectas de MySQL.
+
+**Solución:** Verifique usuario y contraseña en `application.properties`.
+
+### Error: "Could not open JDBC Connection"
+
+**Causa:** MySQL no está en ejecución o la base de datos no existe.
+
+**Solución:**
+1. Verifique que el servicio MySQL esté activo
+2. Confirme que la base de datos `portfolio_db` exista
+3. Valide la URL de conexión
+
+### Error: "Port 8080 was already in use"
+
+**Causa:** El puerto está ocupado por otra aplicación.
+
+**Solución:** Cambie el puerto en `application.properties`:
+```properties
+server.port=8081
+```
+
+### El Formulario de Contacto no Envía Emails
+
+**Causa:** Configuración incorrecta de Gmail SMTP.
+
+**Solución:**
+1. Confirme el uso de contraseña de aplicación (no contraseña personal)
+2. Verifique que la verificación en dos pasos esté activa
+3. Revise los logs para errores de autenticación
+
+### Los Datos no Persisten con H2
+
+**Causa:** H2 es una base de datos en memoria.
+
+**Solución:** Configure MySQL para persistencia permanente de su información profesional.
+
+---
+
+## Checklist de Configuración
+
+Antes de ejecutar la aplicación, verifique:
+
+- [ ] Java 17+ instalado y configurado
+- [ ] Maven instalado y en PATH
+- [ ] Repositorio clonado correctamente
+- [ ] `application.properties` configurado con sus datos
+- [ ] Base de datos MySQL creada (si aplica)
+- [ ] Contraseña de aplicación Gmail generada
+- [ ] Puerto 8080 disponible (o alternativo configurado)
+- [ ] Dependencias de Maven descargadas
+
+---
+
+## Despliegue en Producción
+
+Para desplegar el portfolio en un servidor de producción:
+
+1. Configure MySQL como base de datos
+2. Utilice variables de entorno para datos sensibles
+3. Compile el proyecto: `mvn clean package -DskipTests`
+4. Ejecute el JAR en el servidor
+5. Configure un proxy inverso (Nginx/Apache) si es necesario
+6. Considere usar un dominio personalizado
 
 ---
 
 
-## Licencia y Copyright 
+## Licencia
 
-© **2026 - Sergio Casín** (SERGICBG17) - Todos los derechos reservados.
-
-Este proyecto es de código abierto para fines de consulta, aprendizaje y exhibición de competencias técnicas.
-
-* **Uso Permitido:** Se permite a cualquier usuario, empresa o reclutador clonar, ejecutar y estudiar el código fuente. Se fomenta su uso como material de referencia o aprendizaje.
-* **Atribución y Créditos:** Si utilizas fragmentos de este código o te basas en su arquitectura para tus propios proyectos, se requiere dar el crédito correspondiente mencionando al autor original (**Sergio Casín**) e incluyendo un enlace a este repositorio.
-* **Prohibiciones:** * No se permite la copia exacta (plagio) de este portfolio para su publicación como propio.
-    * Queda estrictamente prohibida la redistribución, venta o uso comercial de esta aplicación, de su estructura lógica o de su diseño sin autorización previa.
-* **Propiedad Intelectual:** La arquitectura del software y la lógica de integración de datos son propiedad exclusiva del autor.
+Este proyecto está bajo la Licencia MIT
 
 ---
-*Si te gusta este proyecto o estás interesado en mi perfil profesional, te invito a conectar conmigo a través de mi GitHub o los canales de contacto de la web.*
